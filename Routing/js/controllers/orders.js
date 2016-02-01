@@ -1,15 +1,14 @@
 (function(){
     var orderController = (scope, routeParams) => {
-        var customerId = routeParam.customerId;
-        
-        scope.orders = null;
-        
+        var customerId = routeParams.customerId;
+            
         var init = () => {
-            scope.orders = scope.customers.find((customer) => {
-                if (customer.id === customerId) {
+            selectedCustomer = scope.customers.find((customer) => {
+                if (customer.id === Number.parseInt(customerId)) {
                     return true;
                 }
             });
+            scope.orders = selectedCustomer.orders;
         };
         
         scope.customers = [{
@@ -73,7 +72,9 @@
             city: 'BRI',
             order: 101
         }];
+        init();
     };
+    
     orderController.$inject = ["$scope", "$routeParams"];
     angular.module("customerModule").controller("orderController", orderController);
 })();

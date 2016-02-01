@@ -8,7 +8,7 @@
                 templateUrl: "views/customers.html"
             })
             .when("/orders/:customerId", {
-                controller: "oderController",
+                controller: "orderController",
                 templateUrl: "views/orders.html"
         })
             .otherwise({
