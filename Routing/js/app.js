@@ -7,9 +7,10 @@
                 controller: "customersController",
                 templateUrl: "views/customers.html"
             })
-//            .when("", {
-//            
-//        })
+            .when("/orders/:customerId", {
+                controller: "oderController",
+                templateUrl: "views/orders.html"
+        })
             .otherwise({
                 redirectTo: "/"
             });
