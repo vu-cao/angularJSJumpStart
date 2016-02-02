@@ -1,0 +1,12 @@
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Product</th>
+        <th>Total</th>
+    </tr>
+    <tr ng-repeat="order in orders">
+        <td>{{ order.id}}</td>
+        <td>{{ order.product }}</td>
+        <td>{{ order.total | currency }}</td>
+    </tr>
+</table>
