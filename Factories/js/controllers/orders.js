@@ -1,18 +1,17 @@
 (function () {
-    var orderController = (scope, routeParams, ordersFactory) => {
+//    Comment to use service
+//    var orderController = ($scope, routeParams, customersFactory) => {
+    var orderController = ($scope, routeParams, customersService) => {
         var customerId = routeParams.customerId;
         
-        scope.orders = null;
+        $scope.customer = null;
         
-//        var init = () => {
-            scope.orders = ordersFactory.getOrdersByCustomerId(customerId);
-//                scope.customers.find((customer) => {
-//                if (customer.id === customerId) {
-//                    return true;
-//                }
-//            });
-//        };
+//        Comment to use service
+//        $scope.customer = customersFactory.getCustomer(customerId);
+        $scope.customer = customersService.getCustomer(customerId);
     };
-    orderController.$inject = ["$scope", "$routeParams", "ordersFactory"];
+//    Comment to use service
+//    orderController.$inject = ["$scope", "$routeParams", "customersFactory"];
+    orderController.$inject = ["$scope", "$routeParams", "customersService"];
     angular.module("customerModule").controller("orderController", orderController);
 })();
