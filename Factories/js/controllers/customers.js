@@ -2,7 +2,7 @@
 
 //    Comment to use service
 //    var customersController = ($scope, customersFactory) => {
-    var customersController = ($scope, customersService) => {
+    var customersController = ($scope, $log, customersService, settings) => {
         $scope.sortBy = "name";
         $scope.reverse = false;
 
@@ -14,7 +14,12 @@
         init = () => {
 //            Comment to use service
 //            $scope.customers = customersFactory.getCustomers();
-            $scope.customers = customersService.getCustomers();
+            customersService.getCustomers()
+                .success(customers => $scope.customers = customers)
+                .error((data, status, header, config) => {
+                    $log.log('ERROR!');
+                });
+            $scope.settings = settings;
         };
         
         init();
@@ -26,6 +31,6 @@
 //    Inject $scope - Option 2
 //    Comment to use service
 //    customersController.$inject = ["$scope", "customersFactory"];
-    customersController.$inject = ["$scope", "customersService"];
+    customersController.$inject = ["$scope", '$log', "customersService", "settings"];
     angular.module("customerModule").controller("customersController", customersController);
 })();

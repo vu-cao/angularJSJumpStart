@@ -8,7 +8,9 @@
         
 //        Comment to use service
 //        $scope.customer = customersFactory.getCustomer(customerId);
-        $scope.customer = customersService.getCustomer(customerId);
+        customersService.getCustomer(customerId)
+            .success(customer => $scope.customer = customer)
+            .error((data, status, header, config) => {  });
     };
 //    Comment to use service
 //    orderController.$inject = ["$scope", "$routeParams", "customersFactory"];
