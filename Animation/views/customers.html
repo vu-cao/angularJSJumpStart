@@ -1,0 +1,16 @@
+Filter: <input type="text" ng-model="filter.name" />
+<br/>
+<table>
+    <tr>
+        <th ng-click="sortByName('name')">Name</th>
+        <th ng-click="sortByName('city')">City</th>
+        <th>Order</th>
+        <th>Joined</th>
+    </tr>
+    <tr ng-repeat="cust in customers | filter:filter | orderBy: sortBy: reverse">
+        <td><a href="#/orders/{{ cust.id }}">{{ cust.name | uppercase }}</a></td>
+        <td>{{ cust.city }}</td>
+        <td>{{ cust.order | currency }}</td>
+        <td>{{ cust.joined | date:'medium' }}</td>
+    </tr>
+</table>
