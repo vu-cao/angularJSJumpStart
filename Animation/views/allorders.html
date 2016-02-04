@@ -1,0 +1,14 @@
+Filter: <input type="text" ng-model="filter.product" />
+<br/>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Product</th>
+        <th>Total</th>
+    </tr>
+    <tr ng-repeat="order in orders | filter:filter">
+        <td>{{ order.id }}</td>
+        <td>{{ order.product }}</td>
+        <td>{{ order.total | currency }}</td>
+    </tr>
+</table>

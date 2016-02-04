@@ -11,13 +11,10 @@ app.use(express.static(__dirname + '/'));
 
 app.get('/customers/:id', function(req, res) {
     var customerId = parseInt(req.params.id);
-    var data = {};
-    for (var i=0,len=customers.length;i<len;i++) {
-        if (customers[i].id === customerId) {
-           data = customers[i];
-           break;
-        }
-    }  
+    data = customers.find(customer => {
+        return customer.id === customerId;
+    });
+    
     res.json(data);
 });
 
@@ -27,14 +24,23 @@ app.get('/customers', function(req, res) {
 });
 
 app.get('/orders', function(req, res) {
-    var orders = [];
-    for (var i=0,len=customers.length;i<len;i++) {
-        if (customers[i].orders) {
-            for (var j=0,ordersLen=customers[i].orders.length;j<ordersLen;j++) {
-                orders.push(customers[i].orders[j]);   
-            }
+    var orders = customers.reduce((array, customer) => {
+        if (customer.orders) {
+            var arr = customer.orders.reduce((arr, order) => {
+                var o = arr.find(or => {
+                    return or.id === order.id;
+                });
+                if (o) {
+                    o.total += order.total;
+                } else {
+                    arr.push(order);
+                }
+                return arr;
+            }, array);
+            return arr;
         }
-    }  
+    }, []);
+
     res.json(orders);
 });
 
@@ -114,6 +120,11 @@ console.log('Express listening on port 8080');
                         id: 5,
                         product: 'Kindle',
                         total: 101.50
+                    },
+                    {
+                        id: 4,
+                        product: 'Headphones',
+                        total: 10
                     }
                 ]
             }

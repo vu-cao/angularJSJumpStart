@@ -1,3 +1,5 @@
-angular.module("customerModule").value("settings", {
-    title: "Customer App"
-});
+(function() {
+    angular.module("customerModule").value("settings", {
+        title: "Customer App"
+    });
+})();

@@ -7,6 +7,9 @@
             },
             getCustomer: (customerId) => {
                 return $http.get('/customers/' + customerId);
+            },
+            getAllOrders: () => {
+                return $http.get('/orders');
             }
         };
         

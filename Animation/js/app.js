@@ -10,7 +10,11 @@
             .when("/orders/:customerId", {
                 controller: "orderController",
                 templateUrl: "views/orders.html"
-        })
+            })
+            .when('/allorders', {
+                controller: 'allOrdersController',
+                templateUrl: 'views/allorders.html'
+            })
             .otherwise({
                 redirectTo: "/"
             });
